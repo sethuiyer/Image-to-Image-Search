@@ -1,0 +1,1 @@
+Keep the images here as well as the dataset.json file of Flickr-8k dataset
