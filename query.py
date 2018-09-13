@@ -1,5 +1,5 @@
-import elasticsearch
-es = elasticsearch.Elasticsearch()  # use default of localhost, port 9200
+from elasticsearch import Elasticsearch
+es = Elasticsearch() 
 
 def description_search(query):
     results = es.search(
@@ -13,17 +13,14 @@ def description_search(query):
     hitCount = results['hits']['total']
     if hitCount > 0:
         if hitCount is 1:
-            print str(hitCount),' result'
+            print(str(hitCount),' result')
         else:
-            print str(hitCount), 'results' 
+            print(str(hitCount), 'results')
         answers =[]  
         for hit in results['hits']['hits']:
             desc = hit['_source']['description']
             imgurl = hit['_source']['imgurl']
-            idnum = hit['_source']['idnum']
-            score = hit['_score']
-            fetch_result = es.get(index="desearch", doc_type="json", id=idnum)
-            answers.append({'URL':fetch_result['_source']['imgurl'],'Description':fetch_result['_source']['description']})
+            answers.append({'URL':imgurl,'Description':desc})
     else:
         answers = []
     return answers

@@ -1,16 +1,18 @@
 # download checkpoint model from http://cs.stanford.edu/people/karpathy/neuraltalk/
-import os.path
+import os
+from os import path 
+os.environ['CUDA_VISIBLE_DEVICES'] = ''
 import numpy as np
-from neuraltalk.imagernn.imagernn_utils import decodeGenerator
-import cPickle as pickle
+from imagernn.imagernn_utils import decodeGenerator
+import _pickle as pickle
 import extract_feat
 FILE_DIR = os.path.dirname(os.path.realpath(__file__))
-CHECKPOINT_PATH = os.path.join(FILE_DIR, 'model_checkpoint_coco_visionlab43.stanford.edu_lstm_11.14.p')
+CHECKPOINT_PATH = os.path.join(FILE_DIR, 'models','model_checkpoint_coco_visionlab43.stanford.edu_lstm_11.14.p')
 BEAM_SIZE = 1
 
 class CaptionGenerator:
     def __init__(self):
-        self.checkpoint = pickle.load(open(CHECKPOINT_PATH, 'rb'))
+        self.checkpoint = pickle.load(open(CHECKPOINT_PATH, 'rb'),encoding='latin1')
         self.checkpoint_params = self.checkpoint['params']
         self.model = self.checkpoint['model']
         self.ixtoword = self.checkpoint['ixtoword']
@@ -38,7 +40,7 @@ class CaptionGenerator:
 
     # absolute file path
     def get_caption(self, file):
-	feat = extract_feat.get_image_feature(file)
+        feat = extract_feat.get_image_feature(file)
         caption = self.predict(feat)
         return caption
 
