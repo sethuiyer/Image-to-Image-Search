@@ -1,0 +1,63 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>Reverse Image Search Engine</title>
+
+  </head>
+  <body id="main">
+    <div class="container">
+      <div class="row">
+        <br><br>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+          <h1>Reverse Image Search</h1>
+        </div>
+        <div class="col-lg-2"></div>
+      </div>
+      <div class="row">
+        <br><br>
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+        <form method="POST" enctype="multipart/form-data">
+        <div class="input-group">
+            <input type="file" name="query_img" class="form-control">
+            <span class="input-group-btn"><button type="submit" class="btn btn-primary">Submit</button></span>
+        </div>
+        </form>
+    </div></div>
+          <br><br>
+          <div class="row">
+          {% if query_path %}
+                <div class="col-lg-8">
+                    <h5>Given Image: </h5>
+                </div>
+                <div class="col-lg-8">
+                    <img id="img" src="{{ query_path }}" width="40%" alt="Query">
+                </div>
+          {% endif %}
+        </div>
+        {% if answers %}
+        <hr>
+                <div class="col-lg-8">
+                    <h5>Results: </h5>
+                </div>
+                <div class="row">
+                    {% for answer in answers %}
+                    <div class="col">
+                        <img id="img" src="{{ answer[0] }}" width="70%" alt="{{ answer[1] }}">
+                    </div>
+                    {% endfor %}
+                 </div>
+        {% endif %}
+    
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-2"></div>
+    <hr><br><br>
+    
+    <footer style="width: 100%; bottom: 30;"><center> Made By - <b>Sethu Iyer</b> </center></footer>
+  </body>
+</html>
