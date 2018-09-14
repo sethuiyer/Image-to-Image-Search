@@ -17,9 +17,8 @@
 <img src="webapp.png">
 
 ### Files
-* `extract_feat.py` : Takes in image, returns the feature vector of the image (CLI)
-* `capgen.py` : Takes in the feature vector, produces image captions using LSTM (Long Short Term Memory network) (CLI and Webapp)
-* `index.py` : Parses the `img/` folder, indexes images and their descriptions in the elastic search server (CLI)
+* `capgen.py` : Takes in the image, produces image captions using LSTM (Long Short Term Memory network) (CLI and Webapp)
+* `index.py` : Parses the `static/img/` folder, indexes images and their descriptions in the elastic search server (CLI)
 * `query.py` : Given a description, returns nearest description and their image path as JSON response. (CLI)
 * `main.py` : Main program, elastic search server must be running before launching this program. (CLI)
 * `server.py` : launches the webapp to do the reverse image search (Webapp)

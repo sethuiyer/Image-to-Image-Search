@@ -2,7 +2,6 @@ import os
 import numpy as np
 from PIL import Image
 from capgen import CaptionGenerator
-from datetime import datetime
 from flask import Flask, request, render_template
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
