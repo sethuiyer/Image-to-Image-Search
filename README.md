@@ -27,3 +27,9 @@
 * `main.py` : Main program, elastic search server must be running before launching this program. (CLI)
 * `server.py` : launches the webapp to do the reverse image search (Webapp)
 
+### Todo:
+1. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
+2. Make a dashboard through which the training of the captioner could be done on custom datasets.
+3. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models.
+4. Extend the index.py to accomodate custom datasets.
+
