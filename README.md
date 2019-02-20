@@ -26,7 +26,8 @@
 * `query.py` : Given a description, returns nearest description and their image path as JSON response. (CLI)
 * `main.py` : Main program, elastic search server must be running before launching this program. (CLI)
 * `server.py` : launches the webapp to do the reverse image search (Webapp)
-* `custom_index.py`: Index custom datasets to the elastic search server. Make sure to put these images inside `static/img/` folder. For example, if the location is `dogs/dog001.jpg` as per the JSON file, the actual location would be interpreted as `static/img/dogs/dog001.jpg` by the search engine. For more info, look at the docstring of this file.
+* `custom_index.py`: Index custom datasets to the elastic search server. This file accepts a file named `custom_dataset.json`. For more info, look at the docstring of this file.
+Make sure to put these images inside `static/img/` folder. For example, if the location is `dogs/dog001.jpg` as per the JSON file, the actual location would be interpreted as `static/img/dogs/dog001.jpg` by the search engine. 
 
 ### What you can expect in future versions?
 1. Extend the index.py to accomodate custom datasets. :white_check_mark:
