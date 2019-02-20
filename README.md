@@ -26,10 +26,12 @@
 * `query.py` : Given a description, returns nearest description and their image path as JSON response. (CLI)
 * `main.py` : Main program, elastic search server must be running before launching this program. (CLI)
 * `server.py` : launches the webapp to do the reverse image search (Webapp)
+* `custom_index.py`: Index custom datasets to the elastic search server. Make sure to put these images inside `static/img/` folder. For example, if the location is `dogs/dog001.jpg` as per the JSON file, the actual location would be interpreted as `static/img/dogs/dog001.jpg` by the search engine. For more info, look at the docstring of this file.
 
 ### What you can expect in future versions?
-1. Extend the index.py to accomodate custom datasets.
+1. Extend the index.py to accomodate custom datasets. :white_check_mark:
 2. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
 3. Make a dashboard through which the training of the captioner could be done on custom datasets.
 4. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models. 
 5. Introduce unit tests and logging to enable smooth debugging.
+
