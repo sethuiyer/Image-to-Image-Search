@@ -17,6 +17,8 @@
 * Flickr-8k LSTM weights (flickr8k\_cnn\_lstm\_v1.p)
 * Flickr-8k dataset is required.
 
+You can download the CNN and LSTM weights [here](https://pan.baidu.com/s/1dEA0sXb)
+
 ## Output
 <img src="webapp.png">
 
