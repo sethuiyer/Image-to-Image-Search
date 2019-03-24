@@ -27,11 +27,9 @@ you can find the dataset [here](https://forms.illinois.edu/sec/1713398)
 * `index.py` : Parses the `static/img/` folder, indexes images and their descriptions in the elastic search server (CLI)
 * `query.py` : Given a description, returns nearest description and their image path as JSON response. (CLI)
 * `main.py` : Main program, elastic search server must be running before launching this program. (CLI)
-* `server.py` : launches the webapp to do the reverse image search (Webapp)
-* `custom_index.py`: Index custom datasets to the elastic search server. This file accepts a file named `custom_dataset.json`. For more info, look at the docstring of this file.
-Make sure to put these images inside `static/img/` folder. For example, if the location is `dogs/dog001.jpg` as per the JSON file, the actual location would be interpreted as `static/img/dogs/dog001.jpg` by the search engine. 
+* `server.py` : launches the webapp to do the reverse image search (Webapp) 
 
-# Frequently Asked Questions
+### Frequently Asked Questions
 1. What is dataset.json and how to prepare it?
 
 dataset.json contains information about location of the image as well as caption of the image. As per [custom_index](https://github.com/sethuiyer/Image-to-Image-search/blob/master/custom_index.py), you can index your own image database to the elastic search server by preparing it as follows:
