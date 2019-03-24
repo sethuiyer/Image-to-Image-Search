@@ -31,10 +31,31 @@ you can find the dataset [here](https://forms.illinois.edu/sec/1713398)
 * `custom_index.py`: Index custom datasets to the elastic search server. This file accepts a file named `custom_dataset.json`. For more info, look at the docstring of this file.
 Make sure to put these images inside `static/img/` folder. For example, if the location is `dogs/dog001.jpg` as per the JSON file, the actual location would be interpreted as `static/img/dogs/dog001.jpg` by the search engine. 
 
-### Planned Enhancements
-1. Extend the index.py to accomodate custom datasets. :white_check_mark:
-2. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
-3. Make a dashboard through which the training of the captioner could be done on custom datasets.
-4. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models. 
-5. Introduce unit tests and logging to enable smooth debugging.
+# Frequently Asked Questions
+1. What is dataset.json and how to prepare it?
 
+dataset.json contains information about location of the image as well as caption of the image. As per [custom_index](https://github.com/sethuiyer/Image-to-Image-search/blob/master/custom_index.py), you can index your own image database to the elastic search server by preparing it as follows:
+
+```python
+import json
+import glob
+
+image_database = glob.glob('/static/img/<your_path_here>') #gets all the image path from the desired folder
+dataset_list = []
+for image in image_database:
+    image.show()
+    print 'Enter the description':
+    description = input()
+    img_data = {}
+    img_data['imgurl'] = image
+    img_data['description'] = description
+    dataset_list.append(img_data)
+dataset_json = {}
+dataset_json['images'] = dataset_list
+json.dump(dataset_json, open('custom_dataset.json','wb')
+```
+
+then run `custom_index.py`
+
+
+    
