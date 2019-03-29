@@ -13,12 +13,10 @@
 * Keras with Tensorflow Backend (Python 3.6)
 * Elastic Search and elasticsearch-py (Elastic Search 6.0)
 
-## Other things which are required
-* Flickr-8k LSTM weights (flickr8k\_cnn\_lstm\_v1.p)
-* Flickr-8k dataset is required.
+## Dataset and Pre-trained models
+* [Flickr-8k LSTM weights (flickr8k\_cnn\_lstm\_v1.p)](https://cs.stanford.edu/people/karpathy/neuraltalk/flickr8k_cnn_lstm_v1.zip)
+* [Flickr-8k dataset](https://forms.illinois.edu/sec/1713398)
 
-You can download the LSTM weights [here](https://cs.stanford.edu/people/karpathy/neuraltalk/flickr8k_cnn_lstm_v1.zip) and 
-you can find the dataset [here](https://forms.illinois.edu/sec/1713398)
 ## Output
 <img src="webapp.png">
 
