@@ -55,7 +55,7 @@ then run `custom_index.py`
 
 
 ### What you can expect in future versions?
-1. Extend the index.py to accomodate custom datasets.
+1. Extend the index.py to accomodate custom datasets. [Done]
 2. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
 3. Make a dashboard through which the training of the captioner could be done on custom datasets.
 4. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models. 
