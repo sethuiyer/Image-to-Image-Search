@@ -1,1 +1,1 @@
-Keep the images here as well as the dataset.json file of Flickr-8k dataset
+Keep the images in this folder or make a softlink to the place where dataset resides.
