@@ -17,7 +17,6 @@ def eval_split(split, dp, model, params, misc, **kwargs):
   BatchGenerator = decodeGenerator(params)
   wordtoix = misc['wordtoix']
 
-  print 'evaluating %s performance in batches of %d' % (split, eval_batch_size)
   logppl = 0
   logppln = 0
   nsent = 0
@@ -36,5 +35,4 @@ def eval_split(split, dp, model, params, misc, **kwargs):
       nsent += 1
 
   ppl2 = 2 ** (logppl / logppln) 
-  print 'evaluated %d sentences and got perplexity = %f' % (nsent, ppl2)
   return ppl2 # return the perplexity
