@@ -2,7 +2,7 @@
 import os
 import numpy as np
 from imagernn.imagernn_utils import decodeGenerator
-import _pickle as pickle
+import pickle
 from keras.applications import VGG16,imagenet_utils
 from keras.preprocessing.image import load_img,img_to_array
 from keras.models import Model
@@ -12,7 +12,7 @@ preprocess = imagenet_utils.preprocess_input
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 FILE_DIR = os.path.dirname(os.path.realpath(__file__))
-CHECKPOINT_PATH = os.path.join(FILE_DIR, 'models','model_checkpoint_coco_visionlab43.stanford.edu_lstm_11.14.p')
+CHECKPOINT_PATH = os.path.join(FILE_DIR, 'models','flickr8k_cnn_lstm_v1.p')
 
 class CaptionGenerator:
     def __init__(self):
