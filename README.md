@@ -53,9 +53,12 @@ json.dump(dataset_json, open('custom_dataset.json','wb')
 
 then run `custom_index.py`
 
+2. I am getting Error 404 index not found while uploading the images. 
+
+Before you launch the server.py, make sure the elastic search service is running and index.py is working correctly.
 
 ### What you can expect in future versions?
-1. Extend the index.py to accomodate custom datasets. [Done]
+1. Extend the index.py to accomodate custom datasets. :white_check_mark:
 2. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
 3. Make a dashboard through which the training of the captioner could be done on custom datasets.
 4. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models. 
