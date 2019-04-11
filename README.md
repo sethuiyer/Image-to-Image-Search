@@ -59,7 +59,7 @@ Before you launch the server.py, make sure the elastic search service is running
 
 ### What you can expect in future versions?
 1. Extend the index.py to accomodate custom datasets. :white_check_mark:
-2. Make another webapp where users can upload custom image description pair.
+2. Make a dashboard through which user can manage their image database.
 2. Make a highly scalable REST API which accepts base64 encoding of the image and returns the caption of the image.
 3. Make a dashboard through which the training of the captioner could be done on custom datasets.
 4. Change the architecture of image captioner in order reduce the memory footprint required by the current pre trained models. 
