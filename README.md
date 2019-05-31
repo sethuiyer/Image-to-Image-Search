@@ -44,3 +44,4 @@ Check out the screenshots folder for more!
 
 ## Thanks
 Thanks to Materialize CSS for the aesthetics, Pretty Printed for the flask tutorials and Andrej Karpathy for wonderful captioning library.
+
