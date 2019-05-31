@@ -23,6 +23,11 @@ For more, check out requirements.txt
 Download this and paste it inside models folder.
 
 ## Output
+<img src="https://github.com/sethuiyer/Image-to-Image-search/raw/bootstrap/webapp.png"/>
+
+New Dashboard release:
+
+
 <img src="screenshots/home_desktop.jpg"/>
 
 Check out the screenshots folder for more!
