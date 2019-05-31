@@ -1,0 +1,4 @@
+{
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "image-search/bin/python3.6"
+}

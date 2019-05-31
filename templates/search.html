@@ -1,0 +1,48 @@
+{% extends "layout.html" %}            
+{% block content %}
+                  <div class="row">
+                                <div class="col s2"></div>
+                                <div class="col s8">
+                                <form method="POST" enctype="multipart/form-data" action="search">
+                                    <div class = "row">
+                                            <div class = "file-field input-field">
+                                               <div>
+                                                  <input type = "file" name = 'query_img'/>
+                                                  <span><button type="submit" class="btn waves-effect waves-light">Search<i class="material-icons right">search</i> </button></span>
+                                               </div>
+                                               
+                                               <div class = "file-path-wrapper">
+                                                  <input class = "file-path validate" type = "text"
+                                                     placeholder = "Search image.." />
+                                               </div>
+                                            </div>
+                                         </div>
+                                </form>
+                            </div>
+                    </div>
+
+                    {% if query_path %}
+                    <div class="row">
+                        <div class="col s2"></div>
+                            <div class="col s8">
+                                <h5>Given Image: </h5>
+                                <img id="img" src="{{ query_path }}" width="40%" alt="Query" class="z-depth-2">
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if answers %}
+                            <div class="row">
+                                <div class="col s2"></div>
+                                <div class="co s8">
+                                        <h5>Results: </h5>
+                                </div>
+                            </div>
+                            <div class="album-row">
+                                <div class="album-col">
+                                    {% for answer in answers %}
+                                    <img id="img" src="{{ answer[0] }}" class="z-depth-2">
+                                    {% endfor %}
+                            </div>
+                        </div>
+                    {% endif %}
+                    {% endblock %}

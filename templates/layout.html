@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+  <html>
+    <head>
+      <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <!--Import materialize.css-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title> Image-to-Image-search</title>
+    <style>
+        .album-row {
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+  padding: 0 4px;
+  margin-left: 25%;
+}
+
+    .album-col {
+  -ms-flex: 25%; /* IE10 */
+  flex: 25%;
+  max-width: 75%;
+  padding: 0 4px;
+}
+.album-col img {
+  margin-top: 8px;
+  margin-left: 4px;
+  width: 40%;
+}
+
+@media screen and (max-width: 800px) {
+  .album-col {
+    -ms-flex: 50%;
+    flex: 50%;
+    max-width: 50%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .album-col {
+    -ms-flex: 100%;
+    flex: 100%;
+    max-width: 100%;
+  }
+}
+
+    </style>
+        </head>
+    <body>
+            <div class="container">
+                    <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
+                  <ul id="nav-mobile" class="sidenav sidenav-fixed z-depth-2">
+                        <li class="bold"><a href="{{ url_for('index') }}" class="collapsible-header waves-effect"><i class="material-icons">home</i>Home </a></li>
+                        <li class="bold"><a href="{{ url_for('search') }}" class="collapsible-header waves-effect"><i class="material-icons">search</i>Image Search</a></li>
+                        <li class="bold"><a href="{{ url_for('database') }}" class="collapsible-header waves-effect"><i class="material-icons">folder</i>Database</a></li>
+                        <li class="bold"><a href="{{ url_for('caption') }}" class="collapsible-header waves-effect"><i class="material-icons">remove_red_eye</i>Caption it!</a></li>
+                        <hr>
+                        <li class="bold center"> Made by <b>Sethu Iyer</b></li>
+                    </ul>  
+                  <br><br>
+                        {% block content %}{% endblock %}
+                  </div>
+
+                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+            <script>
+              M.AutoInit()
+              $(document).ready(function(){
+    $('.sidenav').sidenav();
+  });
+        </script>
+    </body>
+  </html>

@@ -2,24 +2,15 @@ import os
 import numpy as np
 from PIL import Image
 from capgen import CaptionGenerator
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, request, redirect
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
-import json
+from werkzeug.utils import secure_filename
+import glob 
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 es = Elasticsearch()
 gencap = CaptionGenerator()
-
-def index_data():
-    global es
-    with open("dataset.json") as f:
-        data = json.load(f)
-    actions = []
-    for i in range(len(data['images'])):
-        doc = {'id': i, 'imgurl': data['images'][i]['filename'], 'description': data['images'][i]['sentences'][0]['raw'] }
-        actions.append(doc)
-    bulk(es,actions,index="desearch",doc_type="json")
 
 def description_search(query):
     global es
@@ -40,35 +31,81 @@ def description_search(query):
         answers =[]  
         for hit in results['hits']['hits']:
             desc = hit['_source']['description']
-            imgurl = 'static/img/'+ hit['_source']['imgurl']
+            imgurl = hit['_source']['imgurl']
             answers.append([imgurl,desc])
     else:
         answers = []
     return answers
 
-
 app = Flask(__name__)
-@app.route('/', methods=['GET', 'POST'])
+app.config['UPLOAD_FOLDER'] = os.path.join('static','database')
+app.config['TEMP_UPLOAD_FOLDER'] = os.path.join('static','uploads')
+app.config['ALLOWED_EXTENSIONS'] = set(['jpg','jpeg','png'])
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
+@app.route('/')
 def index():
+    return render_template('home.html')
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
     global gencap
     if request.method == 'POST':
+        if 'query_img' not in request.files or request.files['query_img'].filename == '':
+            return render_template('search.html')
         file = request.files['query_img']
-
         img = Image.open(file.stream)  # PIL image
-        uploaded_img_path = "static/" + file.filename
+        uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
         img.save(uploaded_img_path)
         query = gencap.get_caption(uploaded_img_path)
         answers = description_search(query)
 
-        return render_template('index.html',
+        return render_template('search.html',
                                query_path=uploaded_img_path,
                                answers=answers)
     else:
-        return render_template('index.html')
+        return render_template('search.html')
+
+@app.route('/database')
+def database():
+    images = glob.glob(os.path.join(app.config['UPLOAD_FOLDER'],'*'))
+    return render_template('database.html', database_images = images)
+
+@app.route('/upload', methods=['GET','POST'])
+def upload():
+    if request.method == 'POST':
+        if 'photos' not in request.files:
+            return render_template('database.html')
+        actions = []
+        for file in request.files.getlist('photos'):
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+                file.save(file_path)
+                cap = gencap.get_caption(file_path)
+                doc = {'imgurl': file_path, 'description':cap}
+                actions.append(doc)
+        bulk(es,actions,index="desearch",doc_type="json")
+        return render_template('database.html')
+
+@app.route('/caption', methods=['GET','POST'])
+def caption():
+    if request.method == 'POST':
+        if 'query_img' not in request.files or request.files['query_img'].filename == '':
+            return render_template('caption.html')
+        file = request.files['query_img']
+        img = Image.open(file.stream)  # PIL image
+        uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
+        img.save(uploaded_img_path)
+        cap = gencap.get_caption(uploaded_img_path)
+        return render_template('caption.html', caption = cap)
+    else:
+        return render_template('caption.html')
 
 if __name__=="__main__":
-    try:
-        index_data()
-    except Exception as e:
-        pass
     app.run("127.0.0.1", debug=False)

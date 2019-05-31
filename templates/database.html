@@ -1,0 +1,40 @@
+{% extends "layout.html" %}            
+{% block content %}
+                  <div class="row">
+                                <div class="col s2"></div>
+                                <div class="col s8">
+                                <form method="POST" enctype="multipart/form-data" action="upload">
+                                  <div class = "row">
+                                      <div class = "file-field input-field">
+                                         <div>
+                                            <input type = "file" name="photos" multiple />
+                                            <span><button type="submit"  class = "btn waves-effect waves-light">Upload<i class="material-icons right">cloud_upload</i> </button></span>
+                                         </div>
+                                         <div class = "file-path-wrapper">
+                                            <input class = "file-path validate" type = "text"
+                                               placeholder = "Upload multiple images" />
+                                         </div>
+                                      </div>    
+                                   </div>
+                                </form>
+                            </div>
+                    </div> 
+                    {% if database_images %}
+                    <div class="row">
+                        <div class="col s2"></div>
+                        <div class="co s8">
+                                <h5>Database Images: </h5>
+                        </div>
+                    </div>
+                    <div class="album-row">
+                      <div class="album-col">
+
+                        {% for db_img in database_images %}
+                            <img id="img" src="{{db_img}}" class="z-depth-2">
+                        {% endfor %}
+                    </div>
+                  </div>
+                    {% endif %}
+                    {% endblock %}
+
+ 

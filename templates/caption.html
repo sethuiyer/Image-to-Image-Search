@@ -1,0 +1,36 @@
+{% extends "layout.html" %}            
+{% block content %}
+                  <div class="row">
+                                <div class="col s2"></div>
+                                <div class="col s8">
+                                <form method="POST" enctype="multipart/form-data" action="caption">
+                                    <div class = "row">
+                                            <div class = "file-field input-field">
+                                               <div>
+                                                  <input type = "file" name = 'query_img'/>
+                                                  <span><button type="submit" class="btn waves-effect waves-light">Caption<i class="material-icons right">remove_red_eye</i> </button></span>
+                                               </div>
+                                               
+                                               <div class = "file-path-wrapper">
+                                                  <input class = "file-path validate" type = "text"
+                                                     placeholder = "Upload Image" />
+                                               </div>
+                                            </div>
+                                         </div>
+                                </form>
+                            </div>
+                    </div>
+
+                    {% if caption %}
+                    <div class="row">
+                        <div class="col s2"></div>
+                            <div class="col s8">
+                                <h5>Caption: </h5>
+                                <p> {{caption}} </p>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% endblock %}
+
+                    
+ 
