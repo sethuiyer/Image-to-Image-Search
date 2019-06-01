@@ -5,7 +5,8 @@
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <title> Image-to-Image-search</title>
+    <title> Smart Search</title>
+    <link rel=icon href=static/logo.jpg>
     <style>
         .album-row {
   display: -ms-flexbox; /* IE10 */
@@ -50,6 +51,8 @@
             <div class="container">
                     <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
                   <ul id="nav-mobile" class="sidenav sidenav-fixed z-depth-2">
+                        <li class="brand-logo center"><img src="static/logo.jpg" height="40%" width="40%"/></li>
+                        <hr>
                         <li class="bold"><a href="{{ url_for('index') }}" class="collapsible-header waves-effect"><i class="material-icons">home</i>Home </a></li>
                         <li class="bold"><a href="{{ url_for('search') }}" class="collapsible-header waves-effect"><i class="material-icons">search</i>Image Search</a></li>
                         <li class="bold"><a href="{{ url_for('database') }}" class="collapsible-header waves-effect"><i class="material-icons">folder</i>Database</a></li>

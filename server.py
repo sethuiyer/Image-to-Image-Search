@@ -23,6 +23,8 @@ def description_search(query):
             }
             })
     hitCount = results['hits']['total']
+    print(results)
+
     if hitCount > 0:
         if hitCount is 1:
             print(str(hitCount),' result')
@@ -56,7 +58,7 @@ def index():
 def search():
     global gencap
     if request.method == 'POST':
-        if 'query_img' not in request.files or request.files['query_img'].filename == '':
+        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(request.files['query_img'].filename):
             return render_template('search.html')
         file = request.files['query_img']
         img = Image.open(file.stream)  # PIL image
@@ -96,7 +98,7 @@ def upload():
 @app.route('/caption', methods=['GET','POST'])
 def caption():
     if request.method == 'POST':
-        if 'query_img' not in request.files or request.files['query_img'].filename == '':
+        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(request.files['query_img'].filename):
             return render_template('caption.html')
         file = request.files['query_img']
         img = Image.open(file.stream)  # PIL image
