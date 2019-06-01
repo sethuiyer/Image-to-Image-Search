@@ -1,5 +1,8 @@
-# Image-to-Image-search
-* Image-to-Image-search is a reverse image search engine. 
+<img src="static/logo,jpg"/>
+
+
+# SmartSearch
+* SmartSearch is a reverse image search engine. 
 * Search by image: Give it an image and it will return the similar images based on the image captions.
 * Uses Deep Learning for Automatic Image Captioning, Elastic search as it's search engine.
 * Both Command line as well as Webapp interface provided.
