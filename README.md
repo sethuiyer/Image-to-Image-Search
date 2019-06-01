@@ -23,6 +23,11 @@ For more, check out requirements.txt
 Download this and paste it inside models folder.
 
 ## Output
+<img src="https://github.com/sethuiyer/Image-to-Image-search/raw/bootstrap/webapp.png"/>
+
+New Dashboard release:
+
+
 <img src="screenshots/home_desktop.jpg"/>
 
 Check out the screenshots folder for more!
@@ -36,6 +41,9 @@ Check out the screenshots folder for more!
 
 
 ## Tips
+* Install elasticsearch and always check if elastic search process is running before launching server.py or index_database.py.
+
+
 * Instead of using the upload functionality, paste all your images inside `static/img` folder followed by `python index_database.py` to index all those images.
 
 
