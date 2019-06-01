@@ -1,14 +1,13 @@
 <img src="static/logo.jpg"/>
 
-* SmartSearch is a reverse image search engine. 
-* Search by image: Give it an image and it will return the similar images based on the image captions.
-* Uses Deep Learning for Automatic Image Captioning, Elastic search as it's search engine.
-* Both Command line as well as Webapp interface provided.
-* Now you can index custom images, generate captions and do search!
-* Mobile browsers are also supported!
+SmartSearch is a reverse image search engine which finds similar images by generating captions and comparing those captions. Powered by Tensorflow and ElasticSearch.
+
+It also allows the user to upload their custom images to the database and generate captions for the uploaded image.
+
+Material design makes the website mobile friendly as well.
 
 ## Demo
-[Deep Reverse Image Search Engine - YouTube](https://www.youtube.com/watch?v=xNUL2IHl4tQ)
+[Deep Reverse Image Search Engine - YouTube](https://www.youtube.com/watch?v=xNUL2IHl4tQ) demos the core functionality.
 
 
 ## Packages Required:
@@ -27,7 +26,6 @@ Download this and paste it inside models folder.
 <img src="https://github.com/sethuiyer/Image-to-Image-search/raw/bootstrap/webapp.png"/>
 
 New Dashboard release:
-
 
 <img src="screenshots/home_desktop.jpg"/>
 
