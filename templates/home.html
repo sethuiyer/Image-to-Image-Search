@@ -1,29 +1,16 @@
 {% extends "layout.html" %}            
 {% block content %}
+
+<div class="row"><div class="s2"></div><div class="s9 center"><img src="static/logo.jpg" width=60%></div></div>
                   <div class="row">
                         <div class="col s2">
                           <!-- Grey navigation panel -->
                         </div>
                   
-                        <div class="col s15">
-                          <div class="center"><h4 class="section-title"><i class="material-icons">home</i> Home</h4></div>
-                          <hr>
-                          <ul class="browser-default">
-                            <li class="browser-default">SmartSearch is a reverse image search engine.</li>
-                            <li class="browser-default">Search by image: Give it an image and it will return the similar images based on the image captions.</li>
-                            <li class="browser-default">Uses Deep Learning for Automatic Image Captioning, Elastic search as it's search engine.
-                              </li>
-                            <li class="browser-default">Both Command line as well as Webapp interface provided.</li>
-                          </ul>
+                        <div class="col s9">
+                          <p class="caption"> SmartSearch is a reverse image search engine. Built on top of Tensorflow and ElasticSearch. It generates image captions to find similar images.</p>
                           </div>
                   </div>
-                  <div class="row">
-                    <div class="col s2"></div>
-                    <div class="col s9">
-                        <div class="center"><h4>Demo</h4></div>
-                        <hr>
-                        <div class="video-container">
-                          <iframe width="160" height="80" src="https://www.youtube.com/embed/xNUL2IHl4tQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                      </div>
-                      </div>
-                    </div>
+                  
+                    
 {% endblock %}

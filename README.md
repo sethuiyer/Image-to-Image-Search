@@ -2,9 +2,6 @@
 
 SmartSearch is a reverse image search engine which finds similar images by generating captions and comparing those captions. Powered by Tensorflow and ElasticSearch.
 
-It also allows the user to upload their custom images to the database and generate captions for the uploaded image.
-
-Material design makes the website mobile friendly as well.
 
 ## Demo
 [Deep Reverse Image Search Engine - YouTube](https://www.youtube.com/watch?v=xNUL2IHl4tQ) demos the core functionality.
@@ -23,21 +20,9 @@ For more, check out requirements.txt
 Download this and paste it inside models folder.
 
 ## Output
+<img src="static/screenshot-app.jpg"/>
+
 <img src="https://github.com/sethuiyer/Image-to-Image-search/raw/bootstrap/webapp.png"/>
-
-New Dashboard release:
-
-<img src="screenshots/home_desktop.jpg"/>
-
-Check out the screenshots folder for more!
-
-### Files
-* `capgen.py` : Takes in the image, produces image captions using LSTM (Long Short Term Memory network) (CLI and Webapp)
-* `cmdline/index.py` : Parses the `static/img/` folder, indexes images and their descriptions in the elastic search server (CLI)
-* `cmdline/query.py` : Given a description, returns nearest description and their image path as JSON response. (CLI)
-* `cmdline/main.py` : Main program, elastic search server must be running before launching this program. (CLI)
-* `server.py` : launches the webapp to do the reverse image search (Webapp)     
-
 
 ## Tips
 * Install elasticsearch and always check if elastic search process is running before launching server.py or index_database.py.

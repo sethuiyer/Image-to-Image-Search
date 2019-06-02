@@ -17,7 +17,7 @@ def description_search(query):
     results = es.search(
         index="desearch",
         body={
-            "size": 4,
+            "size": 20,
             "query": {
             "match": {"description": query}
             }
@@ -30,11 +30,15 @@ def description_search(query):
             print(str(hitCount),' result')
         else:
             print(str(hitCount), 'results')
-        answers =[]  
-        for hit in results['hits']['hits']:
-            desc = hit['_source']['description']
-            imgurl = hit['_source']['imgurl']
-            answers.append([imgurl,desc])
+        answers =[]
+        max_score = results['hits']['max_score']
+
+        if max_score >= 0.35:
+            for hit in results['hits']['hits']:
+                if hit['_score'] > 0.5 * max_score:
+                    desc = hit['_source']['description']
+                    imgurl = hit['_source']['imgurl']
+                    answers.append([imgurl,desc])
     else:
         answers = []
     return answers
@@ -105,9 +109,9 @@ def caption():
         uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
         img.save(uploaded_img_path)
         cap = gencap.get_caption(uploaded_img_path)
-        return render_template('caption.html', caption = cap)
+        return render_template('caption.html', caption = cap, query_path=uploaded_img_path)
     else:
         return render_template('caption.html')
 
 if __name__=="__main__":
-    app.run("127.0.0.1", debug=False)
+    app.run("127.0.0.1", debug=True)

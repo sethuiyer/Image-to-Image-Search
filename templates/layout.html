@@ -6,51 +6,73 @@
       <!--Import materialize.css-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <title> Smart Search</title>
-    <link rel=icon href=static/logo.jpg>
+    <link rel=icon href=static/favicon.png>
     <style>
-        .album-row {
-  display: -ms-flexbox; /* IE10 */
+        .photo-container {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.photos {
   display: flex;
-  -ms-flex-wrap: wrap; /* IE10 */
+  flex-direction: row;
   flex-wrap: wrap;
-  padding: 0 4px;
-  margin-left: 25%;
+  justify-content: flex-start;
+  align-content: stretch;
+  padding: 0;
+  max-width: 980px;
 }
 
-    .album-col {
-  -ms-flex: 25%; /* IE10 */
-  flex: 25%;
-  max-width: 75%;
-  padding: 0 4px;
-}
-.album-col img {
-  margin-top: 8px;
+.photos img {
+  display: block;
+  float: left;
+  flex: 0 0 auto;
   margin-left: 4px;
-  width: 40%;
+  max-height: 200px;
 }
 
-@media screen and (max-width: 800px) {
-  .album-col {
-    -ms-flex: 50%;
-    flex: 50%;
-    max-width: 50%;
+
+@media screen and (min-width: 1024px) {
+  .photos img {
+    width: calc(100%/6);
+    height: calc(100%/6);
   }
 }
 
-@media screen and (max-width: 600px) {
-  .album-col {
-    -ms-flex: 100%;
-    flex: 100%;
-    max-width: 100%;
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .photos img {
+    width: calc(100%/4);
+    height: calc(100%/4);
   }
 }
 
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .photos img {
+    width: calc(100%/3);
+    height: calc(100%/3);
+  }
+}
+
+@media screen and (min-width: 321px) and (max-width: 480px) {
+  .photos img {
+    width: calc(100%/2);
+    height: calc(100%/2);
+  }
+}
+
+@media screen  and (max-width: 320px) {
+  .photos img {
+    width: 100%;
+    height: 100%;
+  }
+}
     </style>
         </head>
     <body>
+    
             <div class="container">
-                    <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full hide-on-large-only"><i class="material-icons">menu</i></a></div>
-                  <ul id="nav-mobile" class="sidenav sidenav-fixed z-depth-2">
+                    <div class="container"><a href="#" data-target="nav-mobile" class="top-nav sidenav-trigger full medium black-text"><i class="material-icons">menu</i></a></div>
+                  <ul id="nav-mobile" class="sidenav z-depth-2">
                         <li class="brand-logo center"><img src="static/logo.jpg" height="40%" width="40%"/></li>
                         <hr>
                         <li class="bold"><a href="{{ url_for('index') }}" class="collapsible-header waves-effect"><i class="material-icons">home</i>Home </a></li>
@@ -63,7 +85,8 @@
                   <br><br>
                         {% block content %}{% endblock %}
                   </div>
-
+                  
+                 
                   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
             <script>
