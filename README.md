@@ -2,6 +2,7 @@
 
 SmartSearch is a reverse image search engine which finds similar images by generating captions and comparing those captions. Powered by Tensorflow and ElasticSearch.
 
+**Update**: REST APIs for image caption generator and image search are added! ( Shoutout to [xc0d3rz](https://github.com/xc0d3rz) )
 
 ## Demo
 [Deep Reverse Image Search Engine - YouTube](https://www.youtube.com/watch?v=xNUL2IHl4tQ) demos the core functionality.
@@ -36,4 +37,4 @@ Download this and paste it inside models folder.
 
 ## Thanks
 Thanks to Materialize CSS for the aesthetics, Pretty Printed for the flask tutorials and Andrej Karpathy for wonderful captioning library.
-
+Shoutout to [xc0d3rz](https://github.com/xc0d3rz) for the REST API inclusion!
