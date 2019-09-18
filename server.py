@@ -1,16 +1,19 @@
+import glob
 import os
-import numpy as np
+
 from PIL import Image
-from capgen import CaptionGenerator
-from flask import Flask, request, render_template, request, redirect
 from elasticsearch import Elasticsearch
 from elasticsearch.helpers import bulk
+from flask import Flask, render_template, request, Response
 from werkzeug.utils import secure_filename
-import glob 
+import json
+
+from capgen import CaptionGenerator
 
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 es = Elasticsearch()
 gencap = CaptionGenerator()
+
 
 def description_search(query):
     global es
@@ -19,18 +22,18 @@ def description_search(query):
         body={
             "size": 20,
             "query": {
-            "match": {"description": query}
+                "match": {"description": query}
             }
-            })
-    hitCount = results['hits']['total']
+        })
+    hitCount = results['hits']['total']['value']
     print(results)
 
     if hitCount > 0:
         if hitCount is 1:
-            print(str(hitCount),' result')
+            print(str(hitCount), ' result')
         else:
             print(str(hitCount), 'results')
-        answers =[]
+        answers = []
         max_score = results['hits']['max_score']
 
         if max_score >= 0.35:
@@ -38,15 +41,16 @@ def description_search(query):
                 if hit['_score'] > 0.5 * max_score:
                     desc = hit['_source']['description']
                     imgurl = hit['_source']['imgurl']
-                    answers.append([imgurl,desc])
+                    answers.append([imgurl, desc])
     else:
         answers = []
     return answers
 
+
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = os.path.join('static','database')
-app.config['TEMP_UPLOAD_FOLDER'] = os.path.join('static','uploads')
-app.config['ALLOWED_EXTENSIONS'] = set(['jpg','jpeg','png'])
+app.config['UPLOAD_FOLDER'] = os.path.join('static', 'database')
+app.config['TEMP_UPLOAD_FOLDER'] = os.path.join('static', 'uploads')
+app.config['ALLOWED_EXTENSIONS'] = set(['jpg', 'jpeg', 'png'])
 
 
 def allowed_file(filename):
@@ -58,11 +62,13 @@ def allowed_file(filename):
 def index():
     return render_template('home.html')
 
+
 @app.route('/search', methods=['GET', 'POST'])
 def search():
     global gencap
     if request.method == 'POST':
-        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(request.files['query_img'].filename):
+        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(
+                request.files['query_img'].filename):
             return render_template('search.html')
         file = request.files['query_img']
         img = Image.open(file.stream)  # PIL image
@@ -77,12 +83,32 @@ def search():
     else:
         return render_template('search.html')
 
+
+@app.route('/api/search', methods=['POST'])
+def api_search():
+    global gencap
+    if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(
+            request.files['query_img'].filename):
+        return Response(response=json.dumps({'success': False, 'message': 'Uploaded image is invalid or not allowed'}),
+                        status=400, mimetype="application/json")
+    file = request.files['query_img']
+    img = Image.open(file.stream)  # PIL image
+    uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
+    img.save(uploaded_img_path)
+    query = gencap.get_caption(uploaded_img_path)
+    answers = description_search(query)
+
+    return Response(response=json.dumps({'success': True, 'answers': answers}),
+                    status=200, mimetype="application/json")
+
+
 @app.route('/database')
 def database():
-    images = glob.glob(os.path.join(app.config['UPLOAD_FOLDER'],'*'))
-    return render_template('database.html', database_images = images)
+    images = glob.glob(os.path.join(app.config['UPLOAD_FOLDER'], '*'))
+    return render_template('database.html', database_images=images)
 
-@app.route('/upload', methods=['GET','POST'])
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
     if request.method == 'POST':
         if 'photos' not in request.files:
@@ -94,24 +120,42 @@ def upload():
                 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 file.save(file_path)
                 cap = gencap.get_caption(file_path)
-                doc = {'imgurl': file_path, 'description':cap}
+                doc = {'imgurl': file_path, 'description': cap}
                 actions.append(doc)
-        bulk(es,actions,index="desearch",doc_type="json")
+        bulk(es, actions, index="desearch", doc_type="json")
         return render_template('database.html')
 
-@app.route('/caption', methods=['GET','POST'])
+
+@app.route('/caption', methods=['GET', 'POST'])
 def caption():
     if request.method == 'POST':
-        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(request.files['query_img'].filename):
+        if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(
+                request.files['query_img'].filename):
             return render_template('caption.html')
         file = request.files['query_img']
         img = Image.open(file.stream)  # PIL image
         uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
         img.save(uploaded_img_path)
         cap = gencap.get_caption(uploaded_img_path)
-        return render_template('caption.html', caption = cap, query_path=uploaded_img_path)
+        return render_template('caption.html', caption=cap, query_path=uploaded_img_path)
     else:
         return render_template('caption.html')
 
-if __name__=="__main__":
+
+@app.route('/api/caption', methods=['POST'])
+def caption_api():
+    if 'query_img' not in request.files or request.files['query_img'].filename == '' or not allowed_file(
+            request.files['query_img'].filename):
+        return Response(response=json.dumps({'success': False, 'message': 'Uploaded image is invalid or not allowed'}),
+                        status=400, mimetype="application/json")
+    file = request.files['query_img']
+    img = Image.open(file.stream)  # PIL image
+    uploaded_img_path = os.path.join(app.config['TEMP_UPLOAD_FOLDER'], file.filename)
+    img.save(uploaded_img_path)
+    cap = gencap.get_caption(uploaded_img_path)
+    return Response(response=json.dumps({'success': True, 'caption': cap}),
+                    status=200, mimetype="application/json")
+
+
+if __name__ == "__main__":
     app.run("127.0.0.1", debug=True)
