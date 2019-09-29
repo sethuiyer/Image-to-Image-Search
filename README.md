@@ -7,6 +7,9 @@ SmartSearch is a reverse image search engine which finds similar images by gener
 ## Demo
 [Deep Reverse Image Search Engine - YouTube](https://www.youtube.com/watch?v=xNUL2IHl4tQ) demos the core functionality.
 
+## What more to come?
+  * Docker image
+  * Ability to specify your own image/caption pairs
 
 ## Packages Required:
 * Anaconda
