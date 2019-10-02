@@ -12,10 +12,12 @@ services:
       network.host: 0.0.0.0
       discovery.type: single-node
   website:
-    image: image_to_image_search:version2
+    image: image_search:latest
     volumes:
       - ~/.keras:/root/.keras
     ports:
       - "5000:5000"
     depends_on:
       - elasticsearch
+    working_dir: /image_search
+    command: python3 server.py
