@@ -25,7 +25,7 @@ def description_search(query):
                 "match": {"description": query}
             }
         })
-    hitCount = results['hits']['total']['value']
+    hitCount = results['hits']['total']
     print(results)
 
     if hitCount > 0:
