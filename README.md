@@ -2,6 +2,9 @@
 
 SmartSearch is a reverse image search engine which finds similar images by generating captions and comparing those captions. Powered by Tensorflow and ElasticSearch.
 
+**Update**: Mirror of this repository in codeberg: [Image-to-Image-Search](https://codeberg.org/sethuiyer/Image-to-Image-Search)
+
+
 **Update**: REST APIs for image caption generator and image search are added! ( Shoutout to [xc0d3rz](https://github.com/xc0d3rz) )
 
 ## Demo
