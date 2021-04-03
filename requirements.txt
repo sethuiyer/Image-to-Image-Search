@@ -1,6 +1,6 @@
 absl-py==0.7.1
 astor==0.7.1
-bleach==3.1.4
+bleach==3.3.0
 Click==7.0
 elasticsearch==6.3.1
 enum34==1.1.6
